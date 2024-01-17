@@ -1,6 +1,7 @@
 "use server";
 import { flattenAttributes } from "@/lib/utils";
 import { saveSummary } from "@/services/save-summary";
+import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 export async function saveSummaryAction(prevState: any, formData: FormData) {
@@ -9,10 +10,10 @@ export async function saveSummaryAction(prevState: any, formData: FormData) {
     data: {
       videoId: rawFormData.videoId,
       summary: rawFormData.summary,
-    }
+    },
   };
   const data = await saveSummary(dataToSave);
   const flattenedData = flattenAttributes(data);
-  revalidatePath("/");
-  return { ...prevState, data: flattenedData, message: "saved", videoId: rawFormData.videoId, };
+  revalidatePath("/dashboard/summaries");
+  redirect("/dashboard/summaries/" + flattenedData.id);
 }

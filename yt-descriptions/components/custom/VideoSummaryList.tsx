@@ -1,6 +1,6 @@
 import { flattenAttributes } from "@/lib/utils";
-import { updateDescriptionAction } from "@/actions/update-summary-action";
-import { deleteDescriptionAction } from "@/actions/delete-summary-action";
+import { updateSummaryAction } from "@/actions/update-summary-action";
+import { deleteSummaryAction } from "@/actions/delete-summary-action";
 
 import { TextareaCustom } from "@/components/custom/TextareaCustom";
 import { TrashIcon } from "@/components/icons/TrashIcon";
@@ -33,29 +33,29 @@ export default async function VideoSummaryList() {
   if (!data) return <p>No Items Found</p>;
 
   return (
-    <div className="my-4">
+    <div className="grid gap-4 grid-cols-2">
       {data.map((item: any) => (
-        <DescriptionCard key={item.id} item={item} />
+        <SummaryCard key={item.id} item={item} />
       ))}
     </div>
   );
 }
 
-function DescriptionCard({ item }: { readonly item: any }) {
-  const deleteUserById = deleteDescriptionAction.bind(null, item.id);
+function SummaryCard({ item }: { readonly item: any }) {
+  const deleteUserById = deleteSummaryAction.bind(null, item.id);
 
   return (
     <Card className="mb-8 relative">
       <CardHeader>
-        <CardTitle>Video Description</CardTitle>
+        <CardTitle>Video Summary</CardTitle>
       </CardHeader>
       <CardContent>
         <div>
-          <form action={updateDescriptionAction}>
+          <form action={updateSummaryAction}>
             <TextareaCustom
-              name="description"
+              name="summary"
               className="w-full mb-4"
-              defaultValue={item.description}
+              defaultValue={item.summary}
             />
             <input type="hidden" name="id" value={item.id} />
             <Button className="absolute right-4 bottom-4" type="submit">

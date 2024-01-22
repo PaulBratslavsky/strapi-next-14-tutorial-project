@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 
 import { generateSummaryAction } from "@/actions/generate-summary-action";
 import { saveSummaryAction } from "@/actions/save-summary-action";
@@ -22,6 +22,7 @@ export default function Dashboard() {
     generateSummaryAction,
     initialState
   );
+
 
   const [updateState, saveSummary] = useFormState(
     saveSummaryAction,
@@ -45,11 +46,14 @@ function GenerateSummaryForm({
   readonly formAction: any;
   readonly state: any;
 }) {
+  const { pending } = useFormStatus()
+  console.log(pending)
+
   return (
     <form
       action={formAction}
       className="flex gap-2 items-center justify-center my-4"
-    >
+    > 
       <Input
         name="videoId"
         placeholder="Youtube Video ID or URL"
@@ -57,7 +61,7 @@ function GenerateSummaryForm({
         defaultValue={state.videId || ""}
         required
       />
-      <Button type="submit">{"Generate Description"}</Button>
+      <Button type="submit" aria-disabled={pending} >{pending ? "Creating Summary" : "Create Summary"}</Button>
     </form>
   );
 }

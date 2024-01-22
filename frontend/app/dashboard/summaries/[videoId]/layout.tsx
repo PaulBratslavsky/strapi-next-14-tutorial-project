@@ -3,7 +3,8 @@ import { extractYouTubeID } from "@/lib/utils";
 import YouTubePlayer from "@/components/custom/YouTubePlayer";
 import { SectionNav } from "@/components/custom/SectionNav";
 import { getVideoDataById } from "@/loaders";
-
+import CreateNoteForm from "@/components/custom/forms/CreateNoteForm";
+import { Card } from "@/components/ui/card";
 export default async function VideosRoute({
   params,
   children,
@@ -30,9 +31,7 @@ export default async function VideosRoute({
     <div>
       <SectionNav navItems={navItems} />
       <div className="h-full grid gap-4 grid-cols-5 px-6">
-        <div className="col-span-3">
-          {children}
-        </div>
+        <div className="col-span-3">{children}</div>
         <div className="col-span-2">
           <div className="rounded-lg overflow-hidden">
             <YouTubePlayer
@@ -42,6 +41,9 @@ export default async function VideosRoute({
               height="365px"
             />
           </div>
+          <Card className="mt-4 p-4">
+            <CreateNoteForm videoId={params.videoId} />
+          </Card>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 export async function saveSummaryAction(prevState: any, formData: FormData) {
+  console.log(prevState)
   const rawFormData = Object.fromEntries(formData);
   const dataToSave = {
     data: {

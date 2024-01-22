@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "videos",
+  "collectionName": "notes",
   "info": {
-    "singularName": "video",
-    "pluralName": "videos",
-    "displayName": "Video",
+    "singularName": "note",
+    "pluralName": "notes",
+    "displayName": "Note",
     "description": ""
   },
   "options": {
@@ -12,17 +12,17 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "videoId": {
+    "title": {
       "type": "string"
     },
-    "summary": {
+    "content": {
       "type": "richtext"
     },
-    "notes": {
+    "video": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::note.note",
-      "mappedBy": "video"
+      "relation": "manyToOne",
+      "target": "api::video.video",
+      "inversedBy": "notes"
     }
   }
 }

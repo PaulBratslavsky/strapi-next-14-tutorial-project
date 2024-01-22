@@ -1,18 +1,25 @@
-export default async function RenderList({
+import React, { Fragment } from "react";
+
+type Item = {
+  id: string;
+};
+
+interface RenderListProps {
+  data: Item[];
+  component: React.ComponentType<{ item: Item }>;
+  columns?: number;
+}
+
+export default function RenderList({
   data,
-  component,
-}: {
-  readonly data: any;
-  readonly component: any;
-}) {
-  const Component = component;
-  console.log(data);
-  if (!data) return <p>No Items Found</p>;
+  component: Component,
+}: RenderListProps) {
+  if (!data || data.length === 0) return <p>No Items Found</p>;
   return (
-    <div className="grid gap-4 grid-cols-3 p-6">
-      {data.map((item: any) => (
+    <Fragment>
+      {data.map((item) => (
         <Component key={item.id} item={item} />
       ))}
-    </div>
+    </Fragment>
   );
 }

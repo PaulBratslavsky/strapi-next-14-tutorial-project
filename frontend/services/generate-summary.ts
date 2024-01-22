@@ -38,15 +38,16 @@ export async function generateSummary(videoId: string) {
 
   const synopsis_template = `
     INSTRUCTIONS: 
-      1. Summarize the following {text} and include key topics 
-      2. Write using normal tone of voice
-      3. Write in first person 
-      4. Generate title based on the content and include on the top of the summary
-      5. Summarize including key points and benefits
-      6. Return summary
-      4. Return bulleted list of key points and benefits
-      7. Finally write a short blog post based on the content, return in markdown format, include heading and sub headings.
-      8. Write in first person
+      For the this {text} complete the following steps.
+      Generate the title for based on the content provided
+      Summarize the following content and include key topics, writing in first person using noremal tone of voice.
+      Generate bulleted list of key points and benefits
+      Return possible and best recommended key words
+      Write a blog post based on the content 
+        - Include heading and sections.  
+        - Return in markdown.  
+        - Incorporate keywords and key takeaways in to the blog post.
+      Write a recommendation section and include 3 to 5 ways I can improve this blog post.
 `;
 
   const synopsis_prompt = new PromptTemplate({

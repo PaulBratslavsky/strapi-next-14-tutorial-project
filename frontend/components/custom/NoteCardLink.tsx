@@ -23,7 +23,9 @@ export function NoteCardLink({
           <CardTitle>{item.title}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="w-full mb-4">{item.content.slice(0,164) + " [read more]"}</p>
+          <p className="w-full mb-4">
+            {item.content.slice(0, 164) + " [read more]"}
+          </p>
         </CardContent>
         <CardFooter></CardFooter>
       </Card>

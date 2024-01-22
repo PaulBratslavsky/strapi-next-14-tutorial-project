@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 
 export async function saveSummaryAction(prevState: any, formData: FormData) {
   console.log(prevState)
+  console.log(formData)
   const rawFormData = Object.fromEntries(formData);
   const dataToSave = {
     data: {
@@ -15,6 +16,8 @@ export async function saveSummaryAction(prevState: any, formData: FormData) {
   };
   const data = await saveSummary(dataToSave);
   const flattenedData = flattenAttributes(data);
-  revalidatePath("/dashboard/summaries");
-  redirect("/dashboard/summaries/" + flattenedData.id);
+  console.log("flattenedData", flattenedData);
+  return flattenedData;
+  // revalidatePath("/dashboard/summaries");
+  // redirect("/dashboard/summaries/" + flattenedData.id);
 }

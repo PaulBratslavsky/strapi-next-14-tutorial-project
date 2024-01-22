@@ -1,5 +1,6 @@
 import { flattenAttributes } from "@/lib/utils";
 import qs from "qs";
+import { unstable_noStore as noStore } from "next/cache";
 
 const baseUrl = process.env.STRAPI_URL || "http://localhost:1337";
 
@@ -14,15 +15,19 @@ async function fetchData(url: string) {
   }
 }
 
-export function getVideoDataById(videoId: string) {
+export function getVideoById(videoId: string) {
   return fetchData(`${baseUrl}/api/videos/${videoId}`);
 }
 
 export function getTranscripts() {
-  return fetchData(`${baseUrl}/api/videos`);
+  noStore();
+  const query = qs.stringify({ sort: ["createdAt:desc"] });
+  return fetchData(`${baseUrl}/api/videos?${query}`);
 }
 
 export function getNotes(videoId: string) {
+  noStore();
+
   const query = qs.stringify({
     filters: {
       video: { id: videoId },
@@ -33,5 +38,10 @@ export function getNotes(videoId: string) {
       },
     },
   });
+
   return fetchData(`${baseUrl}/api/notes?${query}`);
+}
+
+export function getNoteById(noteId: string) {
+  return fetchData(`${baseUrl}/api/notes/${noteId}`);
 }

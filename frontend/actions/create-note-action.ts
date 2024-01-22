@@ -8,7 +8,6 @@ export async function createNoteAction(prevState: any, formData: FormData) {
   const rawFormData = Object.fromEntries(formData);
   console.log(rawFormData)
   const videoId = rawFormData.videoId;
-  console.log(videoId)
   const dataToSave = {
     data: {
       video: rawFormData.videoId,
@@ -19,7 +18,7 @@ export async function createNoteAction(prevState: any, formData: FormData) {
   const data = await createNote(dataToSave);
   console.log(data)
   const flattenedData = flattenAttributes(data);
-  revalidatePath("/dashboard/summaries" + videoId);
+  revalidatePath("/dashboard/summaries" + videoId + "/notes");
   return {
     ...prevState,
     type: "CREATE_NOTE",

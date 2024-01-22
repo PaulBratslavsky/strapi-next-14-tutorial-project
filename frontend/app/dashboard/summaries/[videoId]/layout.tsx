@@ -2,8 +2,8 @@
 import { extractYouTubeID } from "@/lib/utils";
 import YouTubePlayer from "@/components/custom/YouTubePlayer";
 import { SectionNav } from "@/components/custom/SectionNav";
-import { getVideoDataById } from "@/loaders";
-import CreateNoteForm from "@/components/custom/forms/CreateNoteForm";
+import { getVideoById } from "@/loaders";
+import { CreateNoteForm } from "@/components/custom/forms/CreateNoteForm";
 import { Card } from "@/components/ui/card";
 export default async function VideosRoute({
   params,
@@ -12,7 +12,7 @@ export default async function VideosRoute({
   readonly params: any;
   readonly children: React.ReactNode;
 }) {
-  const data = await getVideoDataById(params.videoId);
+  const data = await getVideoById(params.videoId);
 
   const navItems = [
     {

@@ -1,4 +1,14 @@
+import { NoteCard } from "@/components/custom/NoteCard";
+import { getNoteById } from "@/loaders";
 
-export default function SingleNoteRoute() {
-  return <div>Single Note Route</div>;
+interface ParamsProps {
+  params: {
+    noteId: string;
+  };
+}
+
+export default async function NoteRoute({ params }: ParamsProps) {
+  const data = await getNoteById(params.noteId);
+  if (!data) return <p>No Items Found</p>;
+  return <NoteCard item={data} />;
 }

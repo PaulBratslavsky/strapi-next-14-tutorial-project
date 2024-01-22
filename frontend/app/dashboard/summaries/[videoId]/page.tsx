@@ -1,27 +1,14 @@
-"use client";
-import { flattenAttributes } from "@/lib/utils";
 import { SummaryCard } from "@/components/custom/SummaryCard";
+import { getVideoById } from "@/loaders";
 
-async function getVideoDataById(videoId: string) {
-  const baseUrl = process.env.STRAPI_URL || "http://localhost:1337";
-  try {
-    const response = await fetch(baseUrl + "/api/videos/" + videoId);
-    const data = await response.json();
-    const flattenedData = flattenAttributes(data);
-    console.log(flattenedData);
-    return flattenedData;
-  } catch (error) {
-    console.log("error", error);
-  }
+interface ParamsProps {
+  params: {
+    videoId: string;
+  };
 }
 
-export default async function VideosRoute({
-  params,
-}: {
-  readonly params: any;
-}) {
-  const data = await getVideoDataById(params.videoId);
-
+export default async function VideoRoute({ params }: ParamsProps) {
+  const data = await getVideoById(params.videoId);
   if (!data) return <p>No Items Found</p>;
   return <SummaryCard item={data} />;
 }

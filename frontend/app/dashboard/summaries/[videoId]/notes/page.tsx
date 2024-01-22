@@ -7,7 +7,7 @@ export default async function NotesRoute({ params }: { readonly params: any }) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <RenderList data={data} component={NoteCardLink} />;
+      <RenderList data={data} component={NoteCardLink} />
     </div>
   );
 }

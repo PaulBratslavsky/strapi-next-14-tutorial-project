@@ -1,5 +1,5 @@
-import { updateSummaryAction } from "@/actions/update-summary-action";
-import { deleteSummaryAction } from "@/actions/delete-summary-action";
+import { updateNoteAction } from "@/actions/update-note-action";
+import { deleteNoteAction } from "@/actions/delete-note-action";
 
 import { TextareaCustom } from "@/components/custom/TextareaCustom";
 import { TrashIcon } from "@/components/icons/TrashIcon";
@@ -14,34 +14,34 @@ import {
 } from "@/components/ui/card";
 import { Button } from "../ui/button";
 
-export function SummaryCard({
+export function NoteCard({
   item,
   className,
 }: {
   readonly item: any;
   readonly className?: string;
 }) {
-  const deleteSummaryById = deleteSummaryAction.bind(null, item.id);
+  const deleteNoteById = deleteNoteAction.bind(null, item.id);
 
   return (
     <Card className={cn("mb-8 relative h-auto", className)}>
       <CardHeader>
-        <CardTitle>Video Summary</CardTitle>
+        <CardTitle>{item.title}</CardTitle>
       </CardHeader>
       <CardContent>
         <div>
-          <form action={updateSummaryAction}>
+          <form action={updateNoteAction}>
             <TextareaCustom
-              name="summary"
+              name="content"
               className="w-full mb-4 h-[calc(100vh-245px)] "
-              defaultValue={item.summary}
+              defaultValue={item.content}
             />
             <input type="hidden" name="id" value={item.id} />
             <Button className="absolute right-4 bottom-4" type="submit">
               Update
             </Button>
           </form>
-          <form action={deleteSummaryById}>
+          <form action={deleteNoteById}>
             <Button
               className="absolute right-4 top-4 bg-red-700 hover:bg-red-600"
               type="submit"

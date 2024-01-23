@@ -11,6 +11,6 @@ export async function updateSummaryAction( formData: FormData) {
     }
   };
   const data = await updateSummary(dataToUpdate, id);
-  revalidatePath("/");
+  revalidatePath("/dashboard/summaries/" + id);
   return { data, message: "generateSummaryAction" };
 }

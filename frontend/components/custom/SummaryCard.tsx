@@ -13,6 +13,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "../ui/button";
+import { DeleteButton } from "./buttons/DeleteButton";
+import { SubmitButton } from "./buttons/SubmitButton";
 
 export function SummaryCard({
   item,
@@ -37,17 +39,13 @@ export function SummaryCard({
               defaultValue={item.summary}
             />
             <input type="hidden" name="id" value={item.id} />
-            <Button className="absolute right-4 bottom-4" type="submit">
-              Update
-            </Button>
+            <SubmitButton
+              text="Update Summary"
+              loadingText="Updating Summary"
+            />
           </form>
           <form action={deleteSummaryById}>
-            <Button
-              className="absolute right-4 top-4 bg-red-700 hover:bg-red-600"
-              type="submit"
-            >
-              <TrashIcon className="w-4 h-4" />
-            </Button>
+            <DeleteButton className="absolute right-4 top-4 bg-red-700 hover:bg-red-600" />
           </form>
         </div>
       </CardContent>

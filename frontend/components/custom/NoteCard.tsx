@@ -1,8 +1,6 @@
 import { updateNoteAction } from "@/actions/update-note-action";
 import { deleteNoteAction } from "@/actions/delete-note-action";
-
 import { TextareaCustom } from "@/components/custom/TextareaCustom";
-import { TrashIcon } from "@/components/icons/TrashIcon";
 import { cn } from "@/lib/utils";
 
 import {
@@ -12,7 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "../ui/button";
+
+import { SubmitButton } from "./buttons/SubmitButton";
+import { DeleteButton } from "./buttons/DeleteButton";
 
 export function NoteCard({
   item,
@@ -37,17 +37,14 @@ export function NoteCard({
               defaultValue={item.content}
             />
             <input type="hidden" name="id" value={item.id} />
-            <Button className="absolute right-4 bottom-4" type="submit">
-              Update
-            </Button>
+            <SubmitButton
+              className="absolute right-4 bottom-4"
+              text="Update Note"
+              loadingText="Updating Note"
+            />
           </form>
           <form action={deleteNoteById}>
-            <Button
-              className="absolute right-4 top-4 bg-red-700 hover:bg-red-600"
-              type="submit"
-            >
-              <TrashIcon className="w-4 h-4" />
-            </Button>
+            <DeleteButton className="absolute right-4 top-4 bg-red-700 hover:bg-red-600" />
           </form>
         </div>
       </CardContent>

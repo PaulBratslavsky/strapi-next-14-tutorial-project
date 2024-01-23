@@ -1,7 +1,11 @@
+import qs from "qs";
+
+const query = qs.stringify({ populate: "video" });
+
 export async function updateNote(dataToSend: any, id: string) {
   const baseUrl = process.env.STRAPI_URL || "http://localhost:1337";
   try {
-    const response = await fetch(baseUrl + "/api/notes/" + id, {
+    const response = await fetch(baseUrl + "/api/notes/" + id + "?" + query, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

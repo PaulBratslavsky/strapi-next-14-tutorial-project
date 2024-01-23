@@ -3,7 +3,7 @@ import React from "react";
 import { useFormState } from "react-dom";
 import { createNoteAction } from "@/actions/create-note-action";
 
-import { SubmitButton } from "@/components/custom/SubmitButton";
+import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -19,10 +19,8 @@ export function CreateNoteForm({ videoId }: { videoId: string }) {
     initialState
   );
 
-  console.log(createState);
-
   return (
-    <form className="space-y-4" action={createNote}>
+    <form className="space-y-4" action={createNote} key={createState.data?.id || ""}>
       <div className="space-y-4">
         <Input id="title" name="title" placeholder="Title" required />
         <Textarea

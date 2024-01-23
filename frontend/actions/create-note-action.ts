@@ -18,6 +18,7 @@ export async function createNoteAction(prevState: any, formData: FormData) {
   const data = await createNote(dataToSave);
   console.log(data)
   const flattenedData = flattenAttributes(data);
+  console.log(flattenedData)
   revalidatePath("/dashboard/summaries" + videoId + "/notes");
   return {
     ...prevState,

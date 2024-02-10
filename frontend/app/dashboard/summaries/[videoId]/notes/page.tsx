@@ -1,6 +1,6 @@
 import RenderList from "@/components/custom/RenderList";
 import { NoteCardLink } from "@/components/custom/NoteCardLink";
-import { getNotes } from "@/loaders";
+import { getNotes } from "@/data/loaders";
 
 export default async function NotesRoute({ params }: { readonly params: any }) {
   const { data } = await getNotes(params.videoId);

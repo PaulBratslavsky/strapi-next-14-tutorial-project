@@ -1,5 +1,5 @@
 import React from "react";
-import { generateSummaryAction } from "@/actions/generate-summary-action";
+import { generateSummaryAction } from "@/data/actions/generate-summary-action";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
 

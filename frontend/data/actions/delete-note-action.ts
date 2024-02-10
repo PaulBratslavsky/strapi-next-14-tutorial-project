@@ -1,6 +1,6 @@
 "use server";
 import { flattenAttributes } from "@/lib/utils";
-import { deleteNote } from "@/services/delete-note";
+import { deleteNote } from "@/data/services/delete-note";
 import { redirect } from "next/navigation";
 
 export async function deleteNoteAction(id: string) {

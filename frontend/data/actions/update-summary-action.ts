@@ -1,5 +1,5 @@
 "use server";
-import { updateSummary } from "@/services/update-summary";
+import { updateSummary } from "@/data/services/update-summary";
 import { revalidatePath } from "next/cache";
 
 export async function updateSummaryAction( formData: FormData) {

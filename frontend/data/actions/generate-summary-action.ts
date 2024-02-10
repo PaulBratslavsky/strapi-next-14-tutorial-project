@@ -1,8 +1,8 @@
 "use server";
 import { flattenAttributes } from "@/lib/utils";
 import { redirect } from "next/navigation";
-import { generateSummary } from "@/services/generate-summary";
-import { saveSummary } from "@/services/save-summary";
+import { generateSummary } from "@/data/services/generate-summary";
+import { saveSummary } from "@/data/services/save-summary";
 
 export async function generateSummaryAction(formData: FormData) {
   const rawFormData = Object.fromEntries(formData);

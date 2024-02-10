@@ -1,5 +1,5 @@
 import { SummaryCard } from "@/components/custom/SummaryCard";
-import { getVideoById } from "@/loaders";
+import { getVideoById } from "@/data/loaders";
 
 interface ParamsProps {
   params: {

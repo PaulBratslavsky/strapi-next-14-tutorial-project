@@ -17,7 +17,7 @@ interface DeleteButtonProps {
   className?: string;
 }
 
-export function DeleteButton({ className }: DeleteButtonProps) {
+export function DeleteButton({ className }: Readonly<DeleteButtonProps>) {
   const status = useFormStatus();
   return (
     <Button

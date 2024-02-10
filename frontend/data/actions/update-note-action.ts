@@ -1,6 +1,6 @@
 "use server";
 import { flattenAttributes } from "@/lib/utils";
-import { updateNote } from "@/services/update-note";
+import { updateNote } from "@/data/services/update-note";
 import { revalidatePath } from "next/cache";
 
 export async function updateNoteAction(formData: FormData) {

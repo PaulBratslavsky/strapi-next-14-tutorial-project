@@ -3,7 +3,6 @@
  * @see https://v0.dev/t/YZMZGjDE7Rl
  */
 
-"use client";
 
 import Link from "next/link";
 
@@ -14,6 +13,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/custom/Logo";
+import LoggedIn from "./LoggedIn";
 
 export function TopNav() {
   return (
@@ -32,9 +32,11 @@ export function TopNav() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu> */}
-        <Link href="/login">
-          <Button>Login</Button>
-        </Link>
+        <LoggedIn>
+          <Link href="/login">
+            <Button>Login</Button>
+          </Link>
+        </LoggedIn>
       </div>
     </div>
   );

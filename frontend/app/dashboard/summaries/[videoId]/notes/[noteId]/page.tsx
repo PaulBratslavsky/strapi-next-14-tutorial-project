@@ -1,5 +1,5 @@
 import { NoteCard } from "@/components/custom/NoteCard";
-import { getNoteById } from "@/loaders";
+import { getNoteById } from "@/data/loaders";
 
 interface ParamsProps {
   params: {

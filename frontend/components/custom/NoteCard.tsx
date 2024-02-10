@@ -1,5 +1,5 @@
-import { updateNoteAction } from "@/actions/update-note-action";
-import { deleteNoteAction } from "@/actions/delete-note-action";
+import { updateNoteAction } from "@/data/actions/update-note-action";
+import { deleteNoteAction } from "@/data/actions/delete-note-action";
 import { TextareaCustom } from "@/components/custom/TextareaCustom";
 import { cn } from "@/lib/utils";
 

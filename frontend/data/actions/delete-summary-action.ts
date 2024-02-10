@@ -1,6 +1,6 @@
 "use server";
 import { flattenAttributes } from "@/lib/utils";
-import { deleteSummary } from "@/services/delete-summary";
+import { deleteSummary } from "@/data/services/delete-summary";
 import { redirect } from "next/navigation";
 
 export async function deleteSummaryAction(id: string) {

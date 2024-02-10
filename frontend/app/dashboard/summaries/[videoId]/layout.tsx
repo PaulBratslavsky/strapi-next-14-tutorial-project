@@ -2,7 +2,7 @@
 import { extractYouTubeID } from "@/lib/utils";
 import YouTubePlayer from "@/components/custom/YouTubePlayer";
 import { SectionNav } from "@/components/custom/SectionNav";
-import { getVideoById } from "@/loaders";
+import { getVideoById } from "@/data/loaders";
 import { CreateNoteForm } from "@/components/custom/forms/CreateNoteForm";
 import { Card } from "@/components/ui/card";
 export default async function VideosRoute({

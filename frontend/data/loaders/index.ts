@@ -1,9 +1,7 @@
-"use server";
-
 import qs from "qs";
 import { flattenAttributes } from "@/lib/utils";
-import { cookies } from "next/headers";
 import { unstable_noStore as noStore } from "next/cache";
+import { getAuthToken } from "../actions/get-token";
 
 const baseUrl = process.env.STRAPI_URL ?? "http://localhost:1337";
 
@@ -51,8 +49,8 @@ export async function getNoteById(noteId: string) {
 
 export async function getUserMeLoader() {
   const url = `${baseUrl}/api/users/me?`;
-  const authToken = cookies().get("jwt")?.value;
-  if (!authToken) return { ok: false, data: null };
+  const authToken = await getAuthToken();
+  if (!authToken) return { ok: false, data: null, error: null };
 
   try {
     const response = await fetch(url, {
@@ -64,10 +62,10 @@ export async function getUserMeLoader() {
       cache: "no-cache",
     });
     const data = await response.json();
-    if (data.error && authToken) cookies().delete("jwt");
-    return { ok: true, data: data };
+    if (data.error) return { ok: false, data: null, error: data.error };
+    return { ok: true, data: data, error: null };
   } catch (error) {
     console.log(error);
+    return { ok: false, data: null, error: error };
   }
-  return { ok: false, data: null };
 }

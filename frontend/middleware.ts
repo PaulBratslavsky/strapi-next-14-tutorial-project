@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { getUserMeLoader } from "./data/loaders";
 
-export function middleware(request: NextRequest) {
-  const cookie = request.cookies.get("jwt");
-
+export async function middleware(request: NextRequest) {
+  const user = await  getUserMeLoader();
   const currentPath = request.nextUrl.pathname;
 
-  if (currentPath.startsWith("/dashboard") && cookie === undefined) {
+  if (currentPath.startsWith("/dashboard") && user.ok === false) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

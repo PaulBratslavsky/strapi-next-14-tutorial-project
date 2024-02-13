@@ -3,6 +3,7 @@
  * @see https://v0.dev/t/cnUygawHjiu
  */
 import Link from "next/link";
+import FilePicker from "./FilePicker";
 
 export default function HeroSection() {
   return (

@@ -30,5 +30,6 @@ export default async function LoggedIn({
   readonly children: React.ReactNode;
 }) {
   const user = await getUserMeLoader();
+  console.log("user", user);
   return <div>{user.ok ? <AuthUser userData={user.data} /> : children}</div>;
 }

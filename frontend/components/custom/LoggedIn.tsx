@@ -1,5 +1,5 @@
 import { getUserMeLoader } from "@/data/loaders";
-import { logoutAction } from "@/data/actions/auth-action";
+import { logoutAction } from "@/data/actions/auth-actions";
 import { LogoutIcon } from "@/components/icons/LogoutIcon";
 
 interface AuthUserProps {

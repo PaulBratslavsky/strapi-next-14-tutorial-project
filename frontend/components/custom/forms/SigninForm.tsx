@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormState } from "react-dom";
-import { loginUserAction } from "@/data/actions/auth-action";
+import { loginUserAction } from "@/data/actions/auth-actions";
 
 import Link from "next/link";
 

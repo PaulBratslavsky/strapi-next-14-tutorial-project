@@ -1,5 +1,5 @@
-import { updateSummaryAction } from "@/data/actions/update-summary-action";
-import { deleteSummaryAction } from "@/data/actions/delete-summary-action";
+import { updateSummaryAction } from "@/data/actions/summary-actions";
+import { deleteSummaryAction } from "@/data/actions/summary-actions";
 
 import { TextareaCustom } from "@/components/custom/TextareaCustom";
 import { TrashIcon } from "@/components/icons/TrashIcon";
@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "../ui/button";
+
 import { DeleteButton } from "./buttons/DeleteButton";
 import { SubmitButton } from "./buttons/SubmitButton";
 

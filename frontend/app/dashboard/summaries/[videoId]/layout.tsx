@@ -1,4 +1,3 @@
-"use client";
 import { extractYouTubeID } from "@/lib/utils";
 import YouTubePlayer from "@/components/custom/YouTubePlayer";
 import { SectionNav } from "@/components/custom/SectionNav";

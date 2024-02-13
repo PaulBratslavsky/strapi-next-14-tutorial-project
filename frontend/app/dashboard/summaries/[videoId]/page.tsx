@@ -7,7 +7,7 @@ interface ParamsProps {
   };
 }
 
-export default async function VideoRoute({ params }: ParamsProps) {
+export default async function VideoRoute({ params }: Readonly<ParamsProps>) {
   const data = await getVideoById(params.videoId);
   if (!data) return <p>No Items Found</p>;
   return <SummaryCard item={data} />;

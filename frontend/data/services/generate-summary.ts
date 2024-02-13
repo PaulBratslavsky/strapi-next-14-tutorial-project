@@ -32,7 +32,7 @@ async function getTranscript(id: string) {
 export async function generateSummary(videoId: string) {
   const model = await initializeModel({
     openAIApiKey: process.env.OPEN_AI_API_KEY || "",
-    model: process.env.OPEN_AI_MODEL || "gpt-4-vision-preview",
+    model: process.env.OPEN_AI_MODEL ?? "gpt-4-vision-preview",
     temp: 0.7,
   });
 

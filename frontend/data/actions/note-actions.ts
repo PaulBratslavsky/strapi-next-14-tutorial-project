@@ -2,23 +2,20 @@
 import { flattenAttributes } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
-import { createNote } from "@/data/services/create-note";
-import { deleteNote } from "@/data/services/delete-note";
-import { updateNote } from "@/data/services/update-note";
+import { mutateData } from "../services/mutate-data";
 
 
 export async function createNoteAction(prevState: any, formData: FormData) {
   const rawFormData = Object.fromEntries(formData);
-  const videoId = rawFormData.videoId;
-  const dataToSave = {
+  const videoId = rawFormData.videoId as string;
+  const payload = {
     data: {
       video: rawFormData.videoId,
       title: rawFormData.title,
       content: rawFormData.content
     },
   };
-  const data = await createNote(dataToSave);
+  const data = await mutateData("POST", "/api/notes", payload);
   const flattenedData = flattenAttributes(data);
   revalidatePath("/dashboard/summaries" + videoId + "/notes");
   return {
@@ -30,7 +27,7 @@ export async function createNoteAction(prevState: any, formData: FormData) {
 }
 
 export async function deleteNoteAction(id: string) {
-  const data = await deleteNote(id);
+  const data = await mutateData("DELETE", `/api/notes/${id}`);
   const flattenedData = flattenAttributes(data);
   redirect("/dashboard/summaries/" + flattenedData.video.id + "/notes");
 }
@@ -39,11 +36,11 @@ export async function updateNoteAction(formData: FormData) {
   const rawFormData = Object.fromEntries(formData);
   const id = rawFormData.id as string;
 
-  const dataToUpdate = {
+  const payload = {
     data: { content: rawFormData.content },
   };
 
-  const data = await updateNote(dataToUpdate, id);
+  const data = await mutateData("PUT", `/api/notes/${id}`, payload);
   const flattenedData = flattenAttributes(data);
   revalidatePath("/dashboard/summaries/" + flattenedData.video.id + "/notes/" + id);
   return { data, message: "updateNoteAction" };

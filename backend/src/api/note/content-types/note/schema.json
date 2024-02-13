@@ -23,6 +23,12 @@
       "relation": "manyToOne",
       "target": "api::video.video",
       "inversedBy": "notes"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "notes"
     }
   }
 }

@@ -1,8 +1,6 @@
-import { updateSummaryAction } from "@/data/actions/summary-actions";
-import { deleteSummaryAction } from "@/data/actions/summary-actions";
+import { updateSummaryAction, deleteSummaryAction } from "@/data/actions/summary-actions";
 
 import { TextareaCustom } from "@/components/custom/TextareaCustom";
-import { TrashIcon } from "@/components/icons/TrashIcon";
 import { cn } from "@/lib/utils";
 
 import {

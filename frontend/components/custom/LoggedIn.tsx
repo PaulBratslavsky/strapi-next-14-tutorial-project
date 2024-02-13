@@ -1,4 +1,4 @@
-import { getUserMeLoader } from "@/data/loaders";
+import { getUserMeLoader } from "@/data/services/get-user-me-loader";
 import { logoutAction } from "@/data/actions/auth-actions";
 import { LogoutIcon } from "@/components/icons/LogoutIcon";
 

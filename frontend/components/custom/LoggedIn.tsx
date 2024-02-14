@@ -24,7 +24,7 @@ function AuthUser({ userData }: { readonly userData: AuthUserProps }) {
   );
 }
 
-export default async function LoggedIn({
+export async function LoggedIn({
   children,
 }: {
   readonly children: React.ReactNode;

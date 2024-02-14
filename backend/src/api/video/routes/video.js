@@ -1,18 +1,27 @@
-'use strict';
+"use strict";
 
 /**
  * video router
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
+const { createCoreRouter } = require("@strapi/strapi").factories;
 
-module.exports = createCoreRouter('api::video.video', {
+module.exports = createCoreRouter("api::video.video", {
   config: {
     find: {
-      middlewares: ["api::video.is-video-owner"],
+      middlewares: ["global::is-owner"],
     },
     findOne: {
-      middlewares: ["api::video.is-video-owner"],
+      middlewares: ["global::is-owner"],
+    },
+    update: {
+      middlewares: ["global::is-owner"],
+    },
+    delete: {
+      middlewares: ["global::is-owner"],
+    },
+    create: {
+      middlewares: ["global::set-user-id"],
     },
   },
 });

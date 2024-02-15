@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
+import { StrapiImage } from "./StrapiImage";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,7 +10,7 @@ interface ImagePickerProps {
   name: string;
   label: string;
   showCard?: boolean;
-  previewUrl?: string;
+  defaultValue?: string;
 }
 
 function generateDataUrl(file: File, callback: (imageUrl: string) => void) {
@@ -20,9 +21,11 @@ function generateDataUrl(file: File, callback: (imageUrl: string) => void) {
 
 function ImagePreview({ dataUrl }: { readonly dataUrl: string }) {
   return (
-    <img
+    <StrapiImage
       src={dataUrl}
       alt="preview"
+      height={200}
+      width={200}
       className="rounded-lg w-full object-cover"
     />
   );
@@ -55,10 +58,10 @@ export default function ImagePicker({
   id,
   name,
   label,
-  previewUrl,
+  defaultValue,
 }: Readonly<ImagePickerProps>) {
   const fileInput = useRef<HTMLInputElement>(null);
-  const [dataUrl, setDataUrl] = useState<string | null>(previewUrl || null);
+  const [dataUrl, setDataUrl] = useState<string | null>(defaultValue || null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

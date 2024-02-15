@@ -5,6 +5,17 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export function getStrapiURL(path = "") {
+  return process.env.STRAPI_URL ?? "http://localhost:1337";
+}
+
+export function getStrapiMedia(url: string | null) {
+  if (url == null) return null;
+  if (url.startsWith("http") || url.startsWith("//")) return url;
+  return `${getStrapiURL()}${url}`;
+}
+
+
 
 export function transformData(data: any) {
   let text = '';

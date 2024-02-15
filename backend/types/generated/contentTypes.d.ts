@@ -792,6 +792,10 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::note.note'
     >;
+    firstName: Attribute.String;
+    lastName: Attribute.String;
+    bio: Attribute.Text;
+    image: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

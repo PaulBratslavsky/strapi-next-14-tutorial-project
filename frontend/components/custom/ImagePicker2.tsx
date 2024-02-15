@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -15,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 interface ImagePickerProps {
+  id: string;
   name: string;
   label: string;
   showCard?: boolean;
@@ -43,7 +43,7 @@ function ImageCard({ dataUrl, fileInput }: {
     : <p>No image selected</p>;
 
   return (
-    <Card className={cn("w-[380px]")}>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>Select Image</CardTitle>
       </CardHeader>
@@ -68,6 +68,7 @@ function ImageCard({ dataUrl, fileInput }: {
 
 
 export default function ImagePicker({
+  id,
   name,
   label,
   previewUrl,
@@ -88,7 +89,7 @@ export default function ImagePicker({
         <Label htmlFor={name}>{label}</Label>
         <Input
           type="file"
-          id={name}
+          id={id}
           name={name}
           onChange={handleFileChange}
           ref={fileInput}

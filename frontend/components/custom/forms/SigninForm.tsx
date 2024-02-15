@@ -22,15 +22,12 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { ZodErrors } from "@/components/custom/ZodErrors";
 import { StrapiErrors } from "@/components/custom/StrapiErrors";
+import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
 
 export function SigninForm() {
-  const [formState, formAction] = useFormState(
-    loginUserAction,
-    INITIAL_STATE
-  );
+  const [formState, formAction] = useFormState(loginUserAction, INITIAL_STATE);
 
   return (
     <div className="w-full max-w-md">
@@ -60,7 +57,11 @@ export function SigninForm() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-            <Button className="w-full">Login</Button>
+            <SubmitButton
+              className="w-full"
+              text="Login"
+              loadingText="Loading"
+            />
             <StrapiErrors error={formState.strapiErrors} />
           </CardFooter>
         </Card>

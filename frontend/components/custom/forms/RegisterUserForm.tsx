@@ -22,9 +22,9 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { ZodErrors } from "@/components/custom/ZodErrors";
 import { StrapiErrors } from "@/components/custom/StrapiErrors";
+import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
 
 export function RegisterUserForm() {
   const [formState, formAction] = useFormState(
@@ -66,7 +66,11 @@ export function RegisterUserForm() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-            <Button className="w-full">Sign Up</Button>
+            <SubmitButton
+              className="w-full"
+              text="Register"
+              loadingText="Loading"
+            />
             <StrapiErrors error={formState.strapiErrors} />
           </CardFooter>
         </Card>

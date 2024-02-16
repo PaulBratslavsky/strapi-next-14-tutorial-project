@@ -4,7 +4,6 @@ import { unstable_noStore as noStore } from "next/cache";
 import { getAuthToken } from "../services/get-token";
 
 const PAGE_SIZE = 8;
-
 const baseUrl = process.env.STRAPI_URL ?? "http://localhost:1337";
 
 async function fetchData(url: string) {

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useFormState } from "react-dom";
-import { createNoteAction } from "@/data/actions/note-actions";
+import { updateProfileAction } from "@/data/actions/profile-actions";
 import { cn } from "@/lib/utils";
 
 import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
@@ -25,15 +25,18 @@ interface ProfileFormProps {
 
 export function ProfileForm({ data, className }: { data: Readonly<ProfileFormProps>, className?: string}) {
   
-  const [createState, createNote] = useFormState(
-    createNoteAction,
+  const updateProfileWithId = updateProfileAction.bind(null, data.id)
+
+  const [createState, updateProfile] = useFormState(
+    updateProfileWithId,
     initialState
   );
+
 
   return (
     <form
       className={cn("space-y-4", className)}
-      action={createNote}
+      action={updateProfile}
       key={createState.data?.id || ""}
     >
       <div className="space-y-4 grid ">

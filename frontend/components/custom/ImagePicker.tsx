@@ -61,7 +61,7 @@ export default function ImagePicker({
   defaultValue,
 }: Readonly<ImagePickerProps>) {
   const fileInput = useRef<HTMLInputElement>(null);
-  const [dataUrl, setDataUrl] = useState<string | null>(defaultValue || null);
+  const [dataUrl, setDataUrl] = useState<string | null>(defaultValue ?? null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -81,7 +81,7 @@ export default function ImagePicker({
           accept="image/*"
         />
       </div>
-      <ImageCard dataUrl={dataUrl || ""} fileInput={fileInput} />
+      <ImageCard dataUrl={dataUrl ?? ""} fileInput={fileInput} />
     </React.Fragment>
   );
 }

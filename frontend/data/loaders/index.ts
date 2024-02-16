@@ -3,6 +3,8 @@ import { flattenAttributes } from "@/lib/utils";
 import { unstable_noStore as noStore } from "next/cache";
 import { getAuthToken } from "../services/get-token";
 
+const PAGE_SIZE = 8;
+
 const baseUrl = process.env.STRAPI_URL ?? "http://localhost:1337";
 
 async function fetchData(url: string) {
@@ -29,23 +31,46 @@ export async function getVideoById(videoId: string) {
   return fetchData(`${baseUrl}/api/videos/${videoId}`);
 }
 
-export async function getTranscripts() {
+export async function getTranscripts(currentPage: number, queryString: string) {
   noStore();
-  const query = qs.stringify({ sort: ["createdAt:desc"]});
+  const query = qs.stringify({
+    sort: ["createdAt:desc"],
+    filters: {
+      $or: [{ summary: { $containsi: queryString } }],
+    },
+    pagination: {
+      pageSize: PAGE_SIZE,
+      page: currentPage,
+    },
+  });
   return fetchData(`${baseUrl}/api/videos?${query}`);
 }
 
-export async function getNotes(videoId: string) {
+export async function getNotes(
+  videoId: string,
+  currentPage: number,
+  queryString: string
+) {
   noStore();
 
   const query = qs.stringify({
     filters: {
       video: { id: videoId },
+      $or: [
+        { title: { $containsi: queryString } },
+        { content: { $containsi: queryString } },
+      ],
     },
     populate: {
       video: {
         fields: ["id"],
       },
+    },
+    sort: ["createdAt:desc"],
+
+    pagination: {
+      pageSize: PAGE_SIZE,
+      page: currentPage,
     },
   });
 

@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 type Item = {
   id: string;
 };
@@ -14,10 +16,10 @@ export default function RenderList({
 }: RenderListProps) {
   if (!data || data.length === 0) return <p>No Items Found</p>;
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <Fragment>
       {data.map((item) => (
         <Component key={item.id} item={item} />
       ))}
-    </div>
+    </Fragment>
   );
 }

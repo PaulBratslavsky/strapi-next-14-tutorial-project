@@ -23,7 +23,7 @@ export function Search() {
   }, 300);
 
   return (
-    <div className="form-control mt-6">
+    <div>
       <Input
         type="text"
         placeholder="Search"

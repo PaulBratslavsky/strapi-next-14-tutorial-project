@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 interface PaginationProps {
-  totalPages: number;
+  pageCount: number;
 }
 
 interface PaginationArrowProps {
@@ -41,8 +41,8 @@ const PaginationArrow: FC<PaginationArrowProps> = ({
   );
 };
 
-export default function PaginationComp({
-  totalPages = 5,
+export function PaginationComponent({
+  pageCount,
 }: Readonly<PaginationProps>) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -71,7 +71,7 @@ export default function PaginationComp({
           <PaginationArrow
             direction="right"
             href={createPageURL(currentPage + 1)}
-            isDisabled={currentPage >= totalPages}
+            isDisabled={currentPage >= pageCount}
           />
         </PaginationItem>
       </PaginationContent>

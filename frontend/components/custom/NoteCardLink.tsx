@@ -18,7 +18,7 @@ export function NoteCardLink({
 }) {
   return (
     <Link href={`/dashboard/summaries/${item.video.id}/notes/${item.id}`}>
-      <Card className={cn("relative", className)}>
+      <Card className={cn("relative w-full", className)}>
         <CardHeader>
           <CardTitle>{item.title}</CardTitle>
         </CardHeader>

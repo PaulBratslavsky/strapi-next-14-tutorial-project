@@ -22,8 +22,7 @@ export async function generateSummaryAction(formData: FormData) {
   };
   const data = await mutateData("POST", "/api/videos", payload);
   const flattenedData = flattenAttributes(data);
-  console.log("flattenedData", flattenedData);
-  redirect("/dashboard/summaries");
+  redirect("/dashboard/summaries/" + flattenedData.id);
 }
 
 export async function updateSummaryAction(formData: FormData) {

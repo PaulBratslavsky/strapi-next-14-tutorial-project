@@ -20,10 +20,10 @@ export function LinkCard({
     <Link href={`/dashboard/summaries/${item.id}`}>
       <Card className={cn("relative", className)}>
         <CardHeader>
-          <CardTitle>Video Summary</CardTitle>
+          <CardTitle className="leading-5">{item.title || "Video Summary"}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="w-full mb-4">{item.summary.slice(0,164) + " [read more]"}</p>
+          <p className="w-full mb-4 ">{item.summary.slice(0,164) + " [read more]"}</p>
         </CardContent>
         <CardFooter></CardFooter>
       </Card>

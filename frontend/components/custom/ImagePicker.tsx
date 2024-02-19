@@ -20,7 +20,6 @@ function generateDataUrl(file: File, callback: (imageUrl: string) => void) {
 }
 
 function ImagePreview({ dataUrl }: { readonly dataUrl: string }) {
-  console.log(dataUrl);
   return (
     <StrapiImage
       src={dataUrl}

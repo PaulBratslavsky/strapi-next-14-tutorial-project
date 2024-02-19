@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
 import { useFormState } from "react-dom";
-import { createNoteAction } from "@/data/actions/note-actions";
+import { uploadProfileImageAction } from "@/data/actions/upload-profile-image-action";
 import { cn } from "@/lib/utils";
 
 import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
 import ImagePicker from "@/components/custom/ImagePicker";
+import { ZodErrors } from "../ZodErrors";
 
 interface ProfileImageFormProps {
   id: string;
@@ -26,24 +27,28 @@ export function ProfileImageForm({
   data: Readonly<ProfileImageFormProps>;
   className?: string;
 }) {
-  const [createState, createNote] = useFormState(
-    createNoteAction,
+
+  const uploadProfileImageWithIdAction = uploadProfileImageAction.bind(null, data?.id);
+  
+  const [formState, formAction] = useFormState(
+    uploadProfileImageWithIdAction,
     initialState
   );
 
   return (
     <form
       className={cn("space-y-4", className)}
-      action={createNote}
-      key={createState.data?.id || ""}
+      action={formAction}
+      key={formState.data?.id || ""}
     >
       <div className="">
         <ImagePicker
           id="image"
           name="image"
           label="Profile Image"
-          defaultValue={data.url || ""}
+          defaultValue={data?.url || ""}
         />
+        <ZodErrors error={formState.zodErrors?.image} />
       </div>
       <div className="flex justify-end">
         <SubmitButton text="Update Profile" loadingText="Saving Profile" />

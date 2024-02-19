@@ -68,5 +68,9 @@ export async function generateSummary(videoId: string) {
   const data = await getTranscript(videoId);
   const transformedData = transformData(data);
   const response = await overall_chain.run(transformedData.text);
-  return response;
+
+  return {
+    title: "title",
+    response: response,
+  };
 }

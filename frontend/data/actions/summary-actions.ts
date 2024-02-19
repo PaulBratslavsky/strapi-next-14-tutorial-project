@@ -17,7 +17,7 @@ export async function generateSummaryAction(formData: FormData) {
   const payload = {
     data: {
       videoId: rawFormData.videoId,
-      summary: generateData,
+      summary: generateData.response,
     },
   };
   const data = await mutateData("POST", "/api/videos", payload);
@@ -31,6 +31,7 @@ export async function updateSummaryAction(formData: FormData) {
   const id = rawFormData.id as string;
   const payload = {
     data: {
+      title: rawFormData.title,
       summary: rawFormData.summary,
     },
   };

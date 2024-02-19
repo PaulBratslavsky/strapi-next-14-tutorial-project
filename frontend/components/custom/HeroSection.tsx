@@ -1,11 +1,10 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/cnUygawHjiu
- */
+import { getUserMeLoader } from "@/data/services/get-user-me-loader";
 import Link from "next/link";
-import FilePicker from "./ImagePicker";
 
-export default function HeroSection() {
+
+export default async function HeroSection() {
+  const user = await getUserMeLoader();
+
   return (
     <header className="relative h-[600px] overflow-hidden">
       <img
@@ -30,7 +29,7 @@ export default function HeroSection() {
           className="mt-8 inline-flex items-center justify-center px-6 py-3 text-base font-medium text-black bg-white rounded-md shadow hover:bg-gray-100"
           href="/dashboard"
         >
-          Get Started
+          {user.ok ? "Go to Dashboard" : "Login"}
         </Link>
       </div>
     </header>

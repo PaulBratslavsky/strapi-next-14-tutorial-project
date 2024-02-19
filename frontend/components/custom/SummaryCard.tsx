@@ -1,6 +1,7 @@
 import { updateSummaryAction, deleteSummaryAction } from "@/data/actions/summary-actions";
 
 import { TextareaCustom } from "@/components/custom/TextareaCustom";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 import {
@@ -31,6 +32,8 @@ export function SummaryCard({
       <CardContent>
         <div>
           <form action={updateSummaryAction}>
+          <Input id="title" name="title" placeholder="Update your title" required className="mb-4" defaultValue={item.title}/>
+
             <TextareaCustom
               name="summary"
               className="w-full mb-4 h-[calc(100vh-245px)] "

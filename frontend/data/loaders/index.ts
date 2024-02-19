@@ -35,7 +35,10 @@ export async function getTranscripts(currentPage: number, queryString: string) {
   const query = qs.stringify({
     sort: ["createdAt:desc"],
     filters: {
-      $or: [{ summary: { $containsi: queryString } }],
+      $or: [
+        { title: { $containsi: queryString } },
+        { summary: { $containsi: queryString } },
+      ]
     },
     pagination: {
       pageSize: PAGE_SIZE,

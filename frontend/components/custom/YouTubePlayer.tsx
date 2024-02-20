@@ -2,15 +2,18 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { parseStartTime, parseEndTime } from "@/lib/utils";
 
+
 const playing = false;
 const muted = false;
 const controls = true;
 const playsinline = false;
 const rel = false;
 
+
 declare global {
   interface Window {
     onYouTubeIframeAPIReady: () => void;
+    YT: typeof YT;
   }
 }
 

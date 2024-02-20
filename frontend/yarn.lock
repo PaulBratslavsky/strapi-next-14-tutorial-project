@@ -29,6 +29,13 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@defer/client@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@defer/client/-/client-2.1.1.tgz#639c72bfe3d1f20da6278a27caf8c10d546ec4ff"
+  integrity sha512-SvnDUrILV8/Wt8/TsFksVR338/yi/Wlw5799Xnr/hXVxCWhuu6FeZnYYIAHaOxhSrG0SqWJ0JUorojy4LKInEA==
+  dependencies:
+    parse-duration "^1.1.0"
+
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/@isaacs/cliui/-/cliui-8.0.2.tgz#b37667b7bc181c168782259bab42474fbf52b550"
@@ -1402,6 +1409,11 @@ p-timeout@^3.2.0:
   integrity sha512-rhIwUycgwwKcP9yTOOFK/AKsAopjjCakVqLHePO3CC6Mir1Z99xT+R63jZxAT5lFZLa2inS5h+ZS2GvR99/FBg==
   dependencies:
     p-finally "^1.0.0"
+
+parse-duration@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/parse-duration/-/parse-duration-1.1.0.tgz#5192084c5d8f2a3fd676d04a451dbd2e05a1819c"
+  integrity sha512-z6t9dvSJYaPoQq7quMzdEagSFtpGu+utzHqqxmpVWNNZRIXnvqyCvn9XsTdh7c/w0Bqmdz3RB3YnRaKtpRtEXQ==
 
 path-key@^3.1.0:
   version "3.1.1"

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@defer/client": "^2.1.1",
     "@langchain/openai": "^0.0.9",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-dialog": "^1.0.5",

@@ -4,6 +4,7 @@ import { SectionNav } from "@/components/custom/SectionNav";
 import { getVideoById } from "@/data/loaders";
 import { CreateNoteForm } from "@/components/custom/forms/CreateNoteForm";
 import { Card } from "@/components/ui/card";
+
 export default async function VideosRoute({
   params,
   children,
@@ -40,6 +41,7 @@ export default async function VideosRoute({
               height="365px"
             />
           </div>
+
           <Card className="mt-4 p-4">
             <CreateNoteForm videoId={params.videoId} />
           </Card>

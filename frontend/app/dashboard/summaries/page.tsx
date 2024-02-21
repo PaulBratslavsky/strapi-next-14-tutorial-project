@@ -4,6 +4,9 @@ import { getTranscripts } from "@/data/loaders";
 import { Search } from "@/components/custom/Search";
 import { PaginationComponent as Pagination } from "@/components/custom/Pagination";
 
+import { Suspense } from "react";
+import { LoadingSpinnerFull } from "@/components/custom/LoadingSpinnerFull";
+
 interface SearchParamsProps {
   searchParams?: {
     page?: string;
@@ -23,9 +26,11 @@ export default async function SummariesRoute({
   return (
     <div className="grid grid-cols-1 gap-4 p-4">
       <Search />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <RenderList data={data} component={LinkCard} />
-      </div>
+      <Suspense fallback={<LoadingSpinnerFull />}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <RenderList data={data} component={LinkCard} />
+        </div>
+      </Suspense>
       <Pagination pageCount={pageCount} />
     </div>
   );

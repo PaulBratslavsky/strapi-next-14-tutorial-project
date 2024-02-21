@@ -20,7 +20,10 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
     "styled-components": "5.3.3",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "youtube-transcript": "^1.0.6",
+    "@langchain/openai": "^0.0.14",
+    "langchain": "^0.1.20"
   },
   "author": {
     "name": "A Strapi developer"

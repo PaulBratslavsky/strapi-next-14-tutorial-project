@@ -9,13 +9,10 @@
     "displayName": "Summary Ai"
   },
   "dependencies": {
-    "@langchain/openai": "^0.0.14",
     "@strapi/design-system": "^1.6.3",
     "@strapi/helper-plugin": "^4.6.0",
     "@strapi/icons": "^1.6.3",
-    "langchain": "^0.1.20",
-    "prop-types": "^15.7.2",
-    "youtube-transcript": "^1.0.6"
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "react": "^18.2.0",

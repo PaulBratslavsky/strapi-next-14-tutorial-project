@@ -5,12 +5,15 @@ import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
 import { createSummaryAction } from "@/data/actions/summary-actions";
 import { extractYouTubeID } from "@/lib/utils";
 
-export function SummarizeForm() {
+export function SummarizeForm({ token }: { readonly token: string | undefined }) {
+  console.log("token", token);
   const [loading, setLoading] = useState(false);
 
   async function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     const url = process.env.NEXT_PUBLIC_SUMMARIZE_URL;
     if (url === undefined) throw new Error("No summarize URL found");
+
+    if (token === undefined) throw new Error("No token found");
 
     setLoading(true);
     event.preventDefault();
@@ -20,12 +23,17 @@ export function SummarizeForm() {
     const processedVideoId = extractYouTubeID(videoId);
     if (!processedVideoId) throw new Error("Invalid Youtube Video ID");
 
-    const response = await fetch(url + `/${processedVideoId}`);
+    const response = await fetch(url + `/${processedVideoId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
 
     const payload = {
       data: {
-        videoId: processedVideoId as string,
+        videoId: processedVideoId,
         summary: data.response,
       },
     };

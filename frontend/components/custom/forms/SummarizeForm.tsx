@@ -3,16 +3,32 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
 import { createSummaryAction } from "@/data/actions/summary-actions";
-import { extractYouTubeID } from "@/lib/utils";
+import { cn, extractYouTubeID } from "@/lib/utils";
+import { StrapiErrors } from "../StrapiErrors";
 
-export function SummarizeForm({ token }: { readonly token: string | undefined }) {
+interface StrapiErrorsProps {
+  message: string | null;
+  name: string;
+  status: string | null;
+}
+
+export function SummarizeForm({
+  token,
+}: {
+  readonly token: string | undefined;
+}) {
   console.log("token", token);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<StrapiErrorsProps>({
+    message: null,
+    name: "",
+    status: null,
+  });
 
   async function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     const url = process.env.NEXT_PUBLIC_SUMMARIZE_URL;
-    if (url === undefined) throw new Error("No summarize URL found");
 
+    if (url === undefined) throw new Error("No summarize URL found");
     if (token === undefined) throw new Error("No token found");
 
     setLoading(true);
@@ -30,13 +46,20 @@ export function SummarizeForm({ token }: { readonly token: string | undefined })
       },
     });
     const data = await response.json();
-
     const payload = {
       data: {
         videoId: processedVideoId,
         summary: data.response,
       },
     };
+
+    console.log("response", data);
+
+    if (!response.ok) {
+      setError(data.error);
+      setLoading(false);
+      return;
+    }
 
     const testResponse = await createSummaryAction(payload);
     console.log("response", testResponse);
@@ -45,18 +68,25 @@ export function SummarizeForm({ token }: { readonly token: string | undefined })
     // do something here
   }
 
+  console.log("error", error);
+
+  const errorStyles = error.status ? "outline-1 outline outline-red-500 text-red-700" : "";
+  
   return (
     <div className="w-full max-w-[960px]">
       <form
         onSubmit={handleFormSubmit}
         className="flex gap-2 items-center justify-center"
+        key={error.message ? error.message : "form"}
       >
-        <Input
-          name="videoId"
-          placeholder="Youtube Video ID or URL"
-          className="w-full"
-          required
-        />
+          <Input
+            name="videoId"
+            placeholder={"Youtube Video ID or URL"}
+            defaultValue={error.message ? error.message : ""}
+            className={cn("w-full", errorStyles)}
+            required
+          />
+
         <SubmitButton
           text="Create Summary"
           loadingText="Creating Summary"

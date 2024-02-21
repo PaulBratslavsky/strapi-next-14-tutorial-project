@@ -1,3 +1,7 @@
 'use strict';
 
-module.exports = {};
+const isUserAuthenticated = require('./is-user-authenticated');
+
+module.exports = {
+  isUserAuthenticated,
+};

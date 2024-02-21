@@ -34,7 +34,7 @@ async function getTranscript(id) {
   return response;
 }
 
-async function generateSummary(videoId, transcript, config) {
+async function generateSummary(transcript, config) {
   const model = await initializeModel({
     openAIApiKey: config.openAIApiKey,
     model: config.model,
@@ -68,7 +68,7 @@ async function generateSummary(videoId, transcript, config) {
 
   const overall_chain = new SimpleSequentialChain({
     chains: [generate_synopsis],
-    verbose: true,
+    verbose: false,
   });
 
   const transformedData = transformData(transcript);
@@ -89,7 +89,7 @@ module.exports = ({ strapi }) => ({
     try {
 
       const transcript = await getTranscript(videoId);
-      const response = await generateSummary(videoId, transcript, pluginSettings);
+      const response = await generateSummary(transcript, pluginSettings);
       
       return {
         title: response.title,

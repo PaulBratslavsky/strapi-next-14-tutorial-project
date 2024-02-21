@@ -5,6 +5,9 @@ module.exports = {
       method: 'GET',
       path: '/summary/:videoId',
       handler: 'summaryAi.summary',
+      config: {
+        middlewares: ["plugin::summary-ai.isUserAuthenticated"],
+      }
     }
   ]
 };

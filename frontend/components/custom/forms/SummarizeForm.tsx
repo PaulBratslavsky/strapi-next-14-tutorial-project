@@ -1,15 +1,44 @@
 "use client";
 import React from "react";
-import { generateSummaryAction } from "@/data/actions/summary-actions";
+import { mutateData } from "@/data/services/mutate-data";
+import { flattenAttributes } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
+import { test } from "@/data/actions/test";
 
 export function SummarizeForm() {
-
   async function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    await generateSummaryAction(formData);
+    const videoId = formData.get("videoId") as string;
+    const testUrl = "http://localhost:1337/api/summary-ai/summary";
+
+    console.log("Job Started");
+    const response = await fetch(testUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ videoId }),
+    });
+
+    const data = await response.json();
+    const flattenedData = flattenAttributes(data);
+
+    console.log("flattenedData", flattenedData);
+
+    const payload = {
+      data: {
+        videoId: videoId,
+        summary: data.response,
+      },
+    };
+
+
+    await test(payload);
+
+    console.log("Job Finished");
+    // do something here
   }
 
   return (

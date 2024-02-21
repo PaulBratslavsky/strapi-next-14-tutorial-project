@@ -17,22 +17,24 @@ interface SubmitButtonProps {
   text: string;
   loadingText: string;
   className?: string;
+  loading?: boolean;
 }
 
 export function SubmitButton({
   text,
   loadingText,
+  loading,
   className,
 }: Readonly<SubmitButtonProps>) {
   const status = useFormStatus();
   return (
     <Button
       type="submit"
-      aria-disabled={status.pending}
-      disabled={status.pending}
+      aria-disabled={status.pending || loading}
+      disabled={status.pending || loading}
       className={cn(className)}
     >
-      {status.pending ? <Loader text={loadingText} /> : text}
+      {status.pending || loading ? <Loader text={loadingText} /> : text}
     </Button>
   );
 }

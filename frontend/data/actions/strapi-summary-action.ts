@@ -3,10 +3,9 @@ import { revalidatePath } from "next/cache";
 import { flattenAttributes } from "@/lib/utils";
 import { getAuthToken } from "../services/get-token";
 import { redirect } from "next/navigation";
-import { generateSummary } from "@/data/services/generate-summary";
 import { mutateData } from "@/data/services/mutate-data";
 
-export async function test(payload: {
+export async function strapiSummaryAction(payload: {
   data: {
     videoId: string;
     summary: string;
@@ -15,13 +14,8 @@ export async function test(payload: {
   const authToken = await getAuthToken();
   if (!authToken) throw new Error("No auth token found");
 
-  console.log("payload", payload)
-
   const data = await mutateData("POST", "/api/videos", payload);
   const flattenedData = flattenAttributes(data);
-
-  console.log("Job Finished from action");
-
   redirect("/dashboard/summaries/" + flattenedData.id);
 }
 

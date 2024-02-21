@@ -5,6 +5,6 @@ module.exports = ({ strapi }) => ({
     ctx.body = await strapi
       .plugin('summary-ai')
       .service('summaryAi')
-      .summary();
+      .summary(ctx);
   },
 });

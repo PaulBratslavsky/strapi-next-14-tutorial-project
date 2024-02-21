@@ -1,4 +1,3 @@
-import { getUserMeLoader } from "@/data/services/get-user-me-loader";
 import { logoutAction } from "@/data/actions/auth-actions";
 import { LogoutIcon } from "@/components/icons/LogoutIcon";
 import Link from "next/link";
@@ -18,7 +17,7 @@ function LogoutButton() {
   );
 }
 
-function AuthUser({ userData }: { readonly userData: AuthUserProps }) {
+export function LoggedInUser({ userData }: { readonly userData: AuthUserProps }) {
   return (
     <div className="flex gap-2">
       <Link
@@ -30,13 +29,4 @@ function AuthUser({ userData }: { readonly userData: AuthUserProps }) {
       <LogoutButton />
     </div>
   );
-}
-
-export async function LoggedIn({
-  children,
-}: {
-  readonly children: React.ReactNode;
-}) {
-  const user = await getUserMeLoader();
-  return <div>{user.ok ? <AuthUser userData={user.data} /> : children}</div>;
 }

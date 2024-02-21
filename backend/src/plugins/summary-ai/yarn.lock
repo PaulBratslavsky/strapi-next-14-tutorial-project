@@ -484,9 +484,9 @@
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
 "@langchain/community@~0.0.29":
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/@langchain/community/-/community-0.0.30.tgz#968f08bd8581fc6c9725f49e5d27f4ebb1bae89e"
-  integrity sha512-duYJtC8wN8FeIBkijGmDcOPpcK6dPU3Uwamh9K3ASuM97AUI2gEzZJeVtUPQiWFRPyDOAlPfNtrqxVUy2kmp9g==
+  version "0.0.31"
+  resolved "https://registry.yarnpkg.com/@langchain/community/-/community-0.0.31.tgz#2f9cddf292347dbd0e4cb8d9611e98728ce14368"
+  integrity sha512-bXcEeoTujsxqpJIh2TX8i5dVDkuUebPDG6xg8OaZTOGi9jA5KjwwQ8riiP1tWvr4mFscPAQ7bGZmTU6qBx1c6Q==
   dependencies:
     "@langchain/core" "~0.1.29"
     "@langchain/openai" "~0.0.14"
@@ -496,9 +496,9 @@
     zod "^3.22.3"
 
 "@langchain/core@~0.1.13", "@langchain/core@~0.1.29":
-  version "0.1.30"
-  resolved "https://registry.yarnpkg.com/@langchain/core/-/core-0.1.30.tgz#6f9b5d3cfe9bb447f94bc8c71be1527b9decd302"
-  integrity sha512-3oqEKgwe7U/efieZrCC6BLwOHm4YPj27mRNBZLaB5BwPh3a7gXIevxEnbjN3o5j9kJqc5acG7nn35h7Wkrf2Ag==
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/@langchain/core/-/core-0.1.31.tgz#499c541fec25f5a72e090ea23ef4f514643ed1ef"
+  integrity sha512-XVMl5AhnCJtbzRvWU9CM8Fd5A3ftKSF0O+Z/WjoPUTP3OLAi3+7l+B6aFpuzdnmofzFdAUedtlaPGq3qDwfhEg==
   dependencies:
     ansi-styles "^5.0.0"
     camelcase "6"
@@ -835,9 +835,9 @@
     react-remove-scroll "^2.5.7"
 
 "@strapi/helper-plugin@^4.6.0":
-  version "4.20.1"
-  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.20.1.tgz#36ee3831c3c16e9c34b184b3db5c7a3e41606aba"
-  integrity sha512-3UgSIXmmea5/OtLqSRAiX7ycDqAvsg+UCrb4chJXH8iHnQX4GqHxN8gD8hGZL16m7X0M6qJD7H/y3CDomNRdFw==
+  version "4.20.2"
+  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.20.2.tgz#6d44413d579c9c1f52137f22a9fe418f306d99d7"
+  integrity sha512-rI097ClUvd8ifPWPcEOSnjz/x7CFUE2xye0I0fYyCg2k+/Mqmj7g8QD/DoUW1MHwTQbwwUu5TM/6nMyXyw5BFg==
   dependencies:
     axios "1.6.0"
     date-fns "2.30.0"

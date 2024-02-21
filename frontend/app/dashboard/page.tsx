@@ -1,5 +1,3 @@
-import { SummarizeForm }from "@/components/custom/forms/SummarizeForm";
-
 export default function DashboardIndexRoute() {
-  return <SummarizeForm />;
+  return <h1>Dashboard</h1>
 }

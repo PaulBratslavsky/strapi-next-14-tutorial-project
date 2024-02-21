@@ -10,9 +10,12 @@ export default function DashboardLayout({
       <nav className="border-r bg-gray-100/40 dark:bg-gray-800/40">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-[60px] items-center border-b px-6">
-            <Link className="flex items-center gap-2 font-semibold" href="/dashboard">
+            <Link
+              className="flex items-center gap-2 font-semibold"
+              href="/dashboard"
+            >
               <LayoutDashboardIcon className="h-6 w-6" />
-              <span className="">Generate Summary</span>
+              <span className="">Dashboard</span>
             </Link>
           </div>
           <div className="flex-1 overflow-auto py-2">
@@ -82,8 +85,6 @@ function PieChartIcon(props: any) {
     </svg>
   );
 }
-
-
 
 function UsersIcon(props: any) {
   return (

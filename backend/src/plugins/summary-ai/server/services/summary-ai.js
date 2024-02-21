@@ -1,7 +1,10 @@
 "use strict";
 const { OpenAI } = require("@langchain/openai");
 const { PromptTemplate } = require("langchain/prompts");
-const { LLMChain, SimpleSequentialChain, createExtractionChain } = require("langchain/chains");
+const {
+  LLMChain,
+  SimpleSequentialChain,
+} = require("langchain/chains");
 const { YoutubeTranscript } = require("youtube-transcript");
 
 function transformData(data) {
@@ -31,10 +34,10 @@ async function getTranscript(id) {
   return response;
 }
 
-async function generateSummary(videoId, config) {
+async function generateSummary(videoId, transcript, config) {
   const model = await initializeModel({
     openAIApiKey: config.openAIApiKey,
-    model:  config.model,
+    model: config.model,
     temp: config.temp,
     maxTokens: config.maxTokens,
   });
@@ -68,8 +71,7 @@ async function generateSummary(videoId, config) {
     verbose: true,
   });
 
-  const data = await getTranscript(videoId);
-  const transformedData = transformData(data);
+  const transformedData = transformData(transcript);
   const response = await overall_chain.run(transformedData.text);
 
   return {
@@ -79,13 +81,20 @@ async function generateSummary(videoId, config) {
 }
 
 module.exports = ({ strapi }) => ({
-  async summary() {
+  async summary(ctx) {
+    const videoId = ctx.params.videoId;
+    if (!videoId) ctx.throw(400, "videoId is required");
+
     const pluginSettings = await strapi.config.get("plugin.summary-ai");
     try {
-      const response = await generateSummary("arVNHfFCJfU", pluginSettings);
+
+      const transcript = await getTranscript(videoId);
+      const response = await generateSummary(videoId, transcript, pluginSettings);
+      
       return {
         title: response.title,
-        response: response.response,}
+        response: response.response,
+      };
     } catch (error) {
       console.log(error);
     }

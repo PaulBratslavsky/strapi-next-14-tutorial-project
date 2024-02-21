@@ -2,8 +2,8 @@ module.exports = {
   type: 'content-api',
   routes: [
     {
-      method: 'POST',
-      path: '/summary',
+      method: 'GET',
+      path: '/summary/:videoId',
       handler: 'summaryAi.summary',
     }
   ]

@@ -3,23 +3,17 @@ import { revalidatePath } from "next/cache";
 import { flattenAttributes } from "@/lib/utils";
 import { getAuthToken } from "../services/get-token";
 import { redirect } from "next/navigation";
-import { generateSummary } from "@/data/services/generate-summary";
 import { mutateData } from "@/data/services/mutate-data";
 
-export async function generateSummaryAction(formData: FormData) {
+export async function createSummaryAction(payload: {
+  data: {
+    videoId: string;
+    summary: string;
+  }
+} ) {
   const authToken = await getAuthToken();
   if (!authToken) throw new Error("No auth token found");
 
-  const rawFormData = Object.fromEntries(formData);
-  const videoId = rawFormData.videoId as string;
-  const generateData = await generateSummary(videoId);
-
-  const payload = {
-    data: {
-      videoId: rawFormData.videoId,
-      summary: generateData.response,
-    },
-  };
   const data = await mutateData("POST", "/api/videos", payload);
   const flattenedData = flattenAttributes(data);
   redirect("/dashboard/summaries/" + flattenedData.id);

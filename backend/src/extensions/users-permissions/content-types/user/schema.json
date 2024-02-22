@@ -99,7 +99,7 @@
     },
     "credits": {
       "type": "integer",
-      "default": 1
+      "default": 0
     }
   }
 }

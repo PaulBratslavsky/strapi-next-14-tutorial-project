@@ -7,7 +7,11 @@ const nextConfig = {
         hostname: "localhost",
         port: "1337",
         pathname: "/uploads/**/*",
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'meaningful-melody-7b98e28220.media.strapiapp.com',
+      },
     ],
   },
 };

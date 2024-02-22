@@ -43,13 +43,7 @@ export async function registerUserAction(prevState: any, formData: FormData) {
       message: "Failed to Register.",
     };
   } else {
-    cookies().set("jwt", responseData.jwt, {
-      maxAge: 60 * 60 * 24 * 7,
-      path: "/",
-      domain: process.env.HOST ?? "localhost",
-      httpOnly: true,
-      secure: false,
-    });
+    cookies().set("jwt", responseData.jwt);
     redirect("/dashboard");
   }
 }
@@ -98,13 +92,7 @@ export async function loginUserAction(prevState: any, formData: FormData) {
       message: "Failed to Login.",
     };
   } else {
-    cookies().set("jwt", responseData.jwt, {
-      maxAge: 60 * 60 * 24 * 7,
-      path: "/",
-      domain: process.env.HOST ?? "localhost",
-      httpOnly: true,
-      secure: false,
-    });
+    cookies().set("jwt", responseData.jwt);
     redirect("/dashboard");
   }
 }
@@ -114,3 +102,13 @@ export async function logoutAction() {
   redirect("/");
   return { ok: true };
 }
+
+/*
+ {
+      maxAge: 60 * 60 * 24 * 7, // 1 week
+      path: "/",
+      domain: process.env.HOST ?? "localhost",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+    }
+*/

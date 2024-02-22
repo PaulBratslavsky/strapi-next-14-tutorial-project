@@ -10,9 +10,6 @@ export async function TopNav() {
   const user = await getUserMeLoader();
   const token = await getAuthToken();
 
-  console.log("user", user);
-  console.log("token", token);
-  
   return (
     <div className="flex items-center justify-between px-4 py-3 bg-white shadow-md dark:bg-gray-800">
       <Logo />

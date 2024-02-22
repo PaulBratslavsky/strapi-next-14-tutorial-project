@@ -21,17 +21,32 @@ interface ProfileFormProps {
   firstName: string;
   lastName: string;
   bio: string;
+  credits: number;
 }
 
-export function ProfileForm({ data, className }: { data: Readonly<ProfileFormProps>, className?: string}) {
-  
-  const updateProfileWithId = updateProfileAction.bind(null, data.id)
+function CountBox({ text }: { readonly text: number }) {
+  const style = "font-bold text-md mx-1";
+  const color = text > 0 ? "text-primary" : "text-red-500";
+  return (
+    <div className="flex items-center justify-center h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none">
+      You have<span className={cn(style, color)}>{text}</span>credits
+    </div>
+  );
+}
+
+export function ProfileForm({
+  data,
+  className,
+}: {
+  readonly data: ProfileFormProps;
+  readonly className?: string;
+}) {
+  const updateProfileWithId = updateProfileAction.bind(null, data.id);
 
   const [createState, updateProfile] = useFormState(
     updateProfileWithId,
     initialState
   );
-
 
   return (
     <form
@@ -40,7 +55,7 @@ export function ProfileForm({ data, className }: { data: Readonly<ProfileFormPro
       key={createState.data?.id || ""}
     >
       <div className="space-y-4 grid ">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           <Input
             id="username"
             name="username"
@@ -55,6 +70,7 @@ export function ProfileForm({ data, className }: { data: Readonly<ProfileFormPro
             defaultValue={data.email || ""}
             disabled
           />
+          <CountBox text={data.credits} />
         </div>
 
         <div className="grid grid-cols-2 gap-4">

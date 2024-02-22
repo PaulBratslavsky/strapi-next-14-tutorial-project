@@ -9,8 +9,8 @@ export async function createSummaryAction(payload: {
   data: {
     videoId: string;
     summary: string;
-  }
-} ) {
+  };
+}) {
   const authToken = await getAuthToken();
   if (!authToken) throw new Error("No auth token found");
 
@@ -30,6 +30,7 @@ export async function updateSummaryAction(formData: FormData) {
   };
   const data = await mutateData("PUT", `/api/videos/${id}`, payload);
   revalidatePath("/dashboard/summaries/" + id);
+  revalidatePath("/dashboard/account");
   return { data, message: "generateSummaryAction" };
 }
 

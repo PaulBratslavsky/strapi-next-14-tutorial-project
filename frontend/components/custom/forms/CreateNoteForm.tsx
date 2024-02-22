@@ -13,7 +13,7 @@ const initialState = {
   error: null,
 };
 
-export function CreateNoteForm({ videoId }: { videoId: string }) {
+export function CreateNoteForm({ videoId }: { readonly videoId: string }) {
   const [createState, createNote] = useFormState(
     createNoteAction,
     initialState

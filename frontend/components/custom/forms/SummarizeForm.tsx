@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react"; 
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
 import { createSummaryAction } from "@/data/actions/summary-actions";
@@ -25,7 +25,7 @@ const INITIAL_STATE = {
 export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<StrapiErrorsProps>(INITIAL_STATE);
-  let form = useRef<HTMLFormElement>(null)
+  const [value, setValue] = useState<string>("");
 
   async function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     const url = process.env.NEXT_PUBLIC_SUMMARIZE_URL;
@@ -39,14 +39,16 @@ export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
     const videoId = formData.get("videoId") as string;
 
     const processedVideoId = extractYouTubeID(videoId);
-    
+
     if (!processedVideoId) {
       setLoading(false);
-      return setError({
+      setValue("");
+      setError({
         ...INITIAL_STATE,
         message: "Invalid Youtube Video ID",
         name: "Invalid Id",
       });
+      return;
     }
 
     const response = await fetch(url + `/${processedVideoId}`, {
@@ -64,19 +66,24 @@ export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
     };
 
     if (!response.ok) {
+      setValue("");
       setError(data.error);
       setLoading(false);
       return;
     }
 
     await createSummaryAction(payload);
-    form.current?.reset();
+    setValue("");
     setLoading(false);
   }
 
+  function clearError() {
+    setError(INITIAL_STATE);
+    if (error.message) setValue("");
+  }
 
   const errorStyles = error.message
-    ? "outline-1 outline outline-red-500 text-red-700"
+    ? "outline-1 outline outline-red-500 placeholder:text-red-700"
     : "";
 
   return (
@@ -84,13 +91,15 @@ export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
       <form
         onSubmit={handleFormSubmit}
         className="flex gap-2 items-center justify-center"
-        ref={form}
       >
         <Input
           name="videoId"
-          placeholder={"Youtube Video ID or URL"}
-          defaultValue={error.message ? error.message : ""}
-          onMouseDown={() => setError(INITIAL_STATE)}
+          placeholder={
+            error.message ? error.message : "Youtube Video ID or URL"
+          }
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onMouseDown={clearError}
           className={cn("w-full focus:text-black", errorStyles)}
           required
         />

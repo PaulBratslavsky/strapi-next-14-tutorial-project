@@ -1,7 +1,7 @@
 import { getAuthToken } from "@/data/services/get-token";
 
 export async function fileUploadService(image: any) {
-  const baseUrl = process.env.STRAPI_URL || "http://localhost:1337";
+  const baseUrl = process.env.STRAPI_URL ?? "http://localhost:1337";
 
   const authToken = await getAuthToken();
   if (!authToken) throw new Error("No auth token found");
@@ -19,20 +19,11 @@ export async function fileUploadService(image: any) {
       body: formData,
     });
 
-    if (!response.ok)
-      throw new Error(
-        `Failed to upload image. Status: ${response.status} ${response.statusText}`
-      );
-
     const dataResponse = await response.json();
 
     return dataResponse;
   } catch (error) {
     console.error("Error uploading image:", error);
-    throw new Error(
-      `Error uploading image: ${
-        error instanceof Error ? error.message : String(error)
-      }`
-    );
+    throw error;
   }
 }

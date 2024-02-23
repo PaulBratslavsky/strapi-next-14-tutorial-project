@@ -19,7 +19,6 @@ const ACCEPTED_IMAGE_TYPES = [
 const imageSchema = z.object({
   image: z
     .any()
-    
     .refine((file) => {
       if (file.size === 0 || file.name === undefined) return false;
       else return true;

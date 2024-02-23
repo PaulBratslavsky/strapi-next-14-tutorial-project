@@ -1,6 +1,6 @@
 import RenderList from "@/components/custom/RenderList";
 import { LinkCard } from "@/components/custom/LinkCard";
-import { getTranscripts } from "@/data/loaders";
+import { getSummaries } from "@/data/loaders";
 import { Search } from "@/components/custom/Search";
 import { PaginationComponent as Pagination } from "@/components/custom/Pagination";
 
@@ -18,8 +18,8 @@ export default async function SummariesRoute({
   searchParams,
 }: Readonly<SearchParamsProps>) {
   const currentPage = Number(searchParams?.page) || 1;
-  const query = searchParams?.query || "";
-  const { data, meta } = await getTranscripts(currentPage, query);
+  const query = searchParams?.query ?? "";
+  const { data, meta } = await getSummaries(currentPage, query);
 
   const pageCount = meta.pagination.pageCount;
 

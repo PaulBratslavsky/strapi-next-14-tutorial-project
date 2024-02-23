@@ -30,7 +30,7 @@ export async function getVideoById(videoId: string) {
   return fetchData(`${baseUrl}/api/videos/${videoId}`);
 }
 
-export async function getTranscripts(currentPage: number, queryString: string) {
+export async function getSummaries(currentPage: number, queryString: string) {
   noStore();
   const query = qs.stringify({
     sort: ["createdAt:desc"],
@@ -48,7 +48,7 @@ export async function getTranscripts(currentPage: number, queryString: string) {
   return fetchData(`${baseUrl}/api/videos?${query}`);
 }
 
-export async function getNotes(
+export async function getNotesByVideoId(
   videoId: string,
   currentPage: number,
   queryString: string
@@ -78,6 +78,37 @@ export async function getNotes(
 
   return fetchData(`${baseUrl}/api/notes?${query}`);
 }
+
+export async function getNotes(
+  currentPage: number,
+  queryString: string
+) {
+  noStore();
+
+  const query = qs.stringify({
+    filters: {
+      $or: [
+        { title: { $containsi: queryString } },
+        { content: { $containsi: queryString } },
+      ],
+    },
+    populate: {
+      video: {
+        fields: ["id"],
+      },
+    },
+    sort: ["createdAt:desc"],
+
+    pagination: {
+      pageSize: PAGE_SIZE,
+      page: currentPage,
+    },
+  });
+
+  return fetchData(`${baseUrl}/api/notes?${query}`);
+}
+
+
 
 export async function getNoteById(noteId: string) {
   return fetchData(`${baseUrl}/api/notes/${noteId}`);

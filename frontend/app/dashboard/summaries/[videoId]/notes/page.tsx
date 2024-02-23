@@ -1,7 +1,7 @@
 import RenderList from "@/components/custom/RenderList";
 import { NoteCardLink } from "@/components/custom/NoteCardLink";
 import { PaginationComponent as Pagination } from "@/components/custom/Pagination";
-import { getNotes } from "@/data/loaders";
+import { getNotesByVideoId } from "@/data/loaders";
 import { Search } from "@/components/custom/Search";
 
 interface SearchParamsProps {
@@ -14,7 +14,7 @@ interface SearchParamsProps {
 export default async function NotesRoute({ searchParams, params }: Readonly<SearchParamsProps> & { params: { videoId: string } }) {
   const currentPage = Number(searchParams?.page) || 1;
   const query = searchParams?.query || "";
-  const { data, meta } = await getNotes(params.videoId, currentPage, query);
+  const { data, meta } = await getNotesByVideoId(params.videoId, currentPage, query);
   const pageCount = meta.pagination.pageCount;
 
   return (

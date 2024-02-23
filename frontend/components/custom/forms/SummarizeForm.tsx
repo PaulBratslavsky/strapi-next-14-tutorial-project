@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
+import { toast } from "sonner"
+
 import { createSummaryAction } from "@/data/actions/summary-actions";
 import { cn, extractYouTubeID } from "@/lib/utils";
 
@@ -22,6 +24,7 @@ const INITIAL_STATE = {
   status: null,
 };
 
+
 export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<StrapiErrorsProps>(INITIAL_STATE);
@@ -34,6 +37,8 @@ export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
     if (token === undefined) throw new Error("No token found");
 
     setLoading(true);
+    toast.success("Creating your summary");
+
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const videoId = formData.get("videoId") as string;
@@ -41,6 +46,7 @@ export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
     const processedVideoId = extractYouTubeID(videoId);
 
     if (!processedVideoId) {
+      toast.error("Invalid Youtube Video ID");
       setLoading(false);
       setValue("");
       setError({
@@ -56,7 +62,23 @@ export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
       headers: { Authorization: `Bearer ${token}` },
     });
 
+
+    if (!response.ok ) {
+      console.log(response.status, response.statusText)
+      toast.error(response.statusText);
+      setLoading(false);
+      return;
+    }
+
     const data = await response.json();
+
+    if(data.error) {
+      setValue("");
+      toast.error(data.error.message);
+      setError(data.error);
+      setLoading(false);
+      return;
+    }
 
     const payload = {
       data: {
@@ -67,12 +89,15 @@ export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
 
     if (!response.ok) {
       setValue("");
+      toast.error(data.error.message);
       setError(data.error);
       setLoading(false);
       return;
     }
 
     await createSummaryAction(payload);
+    toast.success("Summary Created!");
+
     setValue("");
     setLoading(false);
   }

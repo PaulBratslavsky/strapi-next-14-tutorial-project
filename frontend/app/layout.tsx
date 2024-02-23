@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { TopNav } from "@/components/custom/TopNav";
 import { Footer } from "@/components/custom/Footer";
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,8 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      
       <body>
         <main className="min-h-screen">
+          <Toaster position="bottom-center"/>
           <TopNav />
           <div>{children}</div>
           <Footer />

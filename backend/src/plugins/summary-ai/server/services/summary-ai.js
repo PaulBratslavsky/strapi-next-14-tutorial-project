@@ -97,6 +97,7 @@ module.exports = ({ strapi }) => ({
       };
     } catch (error) {
       console.log(error);
+      ctx.throw(500, error.message);
     }
   },
 });

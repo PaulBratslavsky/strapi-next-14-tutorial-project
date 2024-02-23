@@ -2,7 +2,10 @@
 import { z } from "zod";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { registerUserService,loginUserService } from "@/data/services/auth-service";
+import {
+  registerUserService,
+  loginUserService,
+} from "@/data/services/auth-service";
 
 const schemaRegister = z.object({
   username: z.string().min(3).max(20, {
@@ -15,6 +18,9 @@ const schemaRegister = z.object({
     message: "Please enter a valid email address",
   }),
 });
+
+// TODO: WRITE ERROR HANDLER 
+// https://github.com/strapi/strapi/blob/develop/packages/core/strapi/src/middlewares/errors.ts
 
 export async function registerUserAction(prevState: any, formData: FormData) {
   const validatedFields = schemaRegister.safeParse({
@@ -32,20 +38,28 @@ export async function registerUserAction(prevState: any, formData: FormData) {
     };
   }
 
-  const response = await registerUserService(validatedFields.data);
-  const responseData = await response.json();
+  const responseData = await registerUserService(validatedFields.data);
 
-  if (!response.ok && responseData.error) {
+  if (!responseData) {
+    return {
+      ...prevState,
+      strapiErrors: null,
+      zodErrors: null,
+      message: "Ops! Something went wrong. Please try again.",
+    };
+  }
+
+  if (responseData.error) {
     return {
       ...prevState,
       strapiErrors: responseData.error,
       zodErrors: null,
       message: "Failed to Register.",
     };
-  } else {
-    cookies().set("jwt", responseData.jwt);
-    redirect("/dashboard");
   }
+
+  cookies().set("jwt", responseData.jwt);
+  redirect("/dashboard");
 }
 
 const schemaLogin = z.object({
@@ -81,20 +95,18 @@ export async function loginUserAction(prevState: any, formData: FormData) {
     };
   }
 
-  const response = await loginUserService(validatedFields.data);
-  const responseData = await response.json();
+  const responseData = await loginUserService(validatedFields.data);
 
-  if (!response.ok && responseData.error) {
+  if (!responseData) {
     return {
       ...prevState,
       strapiErrors: responseData.error,
       zodErrors: null,
-      message: "Failed to Login.",
+      message: "Ops! Something went wrong. Please try again.",
     };
-  } else {
-    cookies().set("jwt", responseData.jwt);
-    redirect("/dashboard");
   }
+  cookies().set("jwt", responseData.jwt);
+  redirect("/dashboard");
 }
 
 export async function logoutAction() {

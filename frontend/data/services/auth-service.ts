@@ -24,12 +24,10 @@ export async function registerUserService(userData: RegisterUserProps) {
       cache: "no-cache",
     });
 
-    return response;
+    return response.json();
+
   } catch (error) {
     console.error("Registration Service Error:", error);
-    throw new Error(
-      "Oops! Something went wrong during the registration process."
-    );
   }
 }
 
@@ -47,10 +45,10 @@ export async function loginUserService(userData: LoginUserProps) {
       cache: "no-cache",
     });
 
-    return response;
+    return response.json();
   } catch (error) {
     console.error("Login Service Error:", error);
-    throw new Error("Oops! Something went wrong during the login process.");
+    throw error;
   }
 }
 

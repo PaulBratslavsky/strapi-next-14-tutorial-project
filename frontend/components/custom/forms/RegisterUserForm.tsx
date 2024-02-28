@@ -37,7 +37,7 @@ export function RegisterUserForm() {
       <form action={formAction}>
         <Card>
           <CardHeader className="space-y-1">
-            <CardTitle className="text-3xl font-bold">Login</CardTitle>
+            <CardTitle className="text-3xl font-bold">Sign Up</CardTitle>
             <CardDescription>
               Enter your details to create a new account
             </CardDescription>
@@ -77,7 +77,7 @@ export function RegisterUserForm() {
         <div className="mt-4 text-center text-sm">
           Have an account?
           <Link className="underline ml-2" href="login">
-            Login
+            Log In
           </Link>
         </div>
       </form>

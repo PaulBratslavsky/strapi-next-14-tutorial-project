@@ -19,10 +19,11 @@ const schemaRegister = z.object({
   }),
 });
 
-// TODO: WRITE ERROR HANDLER 
+// TODO: WRITE ERROR HANDLER
 // https://github.com/strapi/strapi/blob/develop/packages/core/strapi/src/middlewares/errors.ts
 
 export async function registerUserAction(prevState: any, formData: FormData) {
+  
   const validatedFields = schemaRegister.safeParse({
     username: formData.get("username"),
     password: formData.get("password"),
@@ -105,6 +106,16 @@ export async function loginUserAction(prevState: any, formData: FormData) {
       message: "Ops! Something went wrong. Please try again.",
     };
   }
+
+  if (responseData.error) {
+    return {
+      ...prevState,
+      strapiErrors: responseData.error,
+      zodErrors: null,
+      message: "Failed to Login.",
+    };
+  }
+
   cookies().set("jwt", responseData.jwt);
   redirect("/dashboard");
 }

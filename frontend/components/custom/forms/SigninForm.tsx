@@ -34,7 +34,7 @@ export function SigninForm() {
       <form action={formAction}>
         <Card>
           <CardHeader className="space-y-1">
-            <CardTitle className="text-3xl font-bold">Login</CardTitle>
+            <CardTitle className="text-3xl font-bold">Log In</CardTitle>
             <CardDescription>
               Enter your details to login to your account
             </CardDescription>
@@ -68,7 +68,7 @@ export function SigninForm() {
         <div className="mt-4 text-center text-sm">
           Don't have an account?
           <Link className="underline ml-2" href="signup">
-            Sign up
+            Sign Up
           </Link>
         </div>
       </form>

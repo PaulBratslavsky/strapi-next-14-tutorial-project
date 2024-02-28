@@ -6,6 +6,7 @@ import { SubmitButton } from "@/components/custom/buttons/SubmitButton";
 import { toast } from "sonner"
 
 import { createSummaryAction } from "@/data/actions/summary-actions";
+import { generateSummaryService } from "@/data/services/generate-summary-service";
 import { cn, extractYouTubeID } from "@/lib/utils";
 
 interface StrapiErrorsProps {
@@ -24,7 +25,7 @@ const INITIAL_STATE = {
   status: null,
 };
 
-
+  
 export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<StrapiErrorsProps>(INITIAL_STATE);
@@ -57,25 +58,18 @@ export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
       return;
     }
 
-    const response = await fetch(url + `/${processedVideoId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const responseData  = await generateSummaryService(processedVideoId, token);
 
-
-    if (!response.ok ) {
-      console.log(response.status, response.statusText)
-      toast.error(response.statusText);
+    if (!responseData ) {
+      toast.error("Ops! Something went wrong. Please try again later.");
       setLoading(false);
       return;
     }
 
-    const data = await response.json();
-
-    if(data.error) {
+    if(responseData.error) {
       setValue("");
-      toast.error(data.error.message);
-      setError(data.error);
+      toast.error(responseData.error.message);
+      setError(responseData.error);
       setLoading(false);
       return;
     }
@@ -83,17 +77,10 @@ export function SummarizeForm({ token }: Readonly<SummaryFormProps>) {
     const payload = {
       data: {
         videoId: processedVideoId,
-        summary: data.response,
+        summary: responseData.response,
       },
     };
 
-    if (!response.ok) {
-      setValue("");
-      toast.error(data.error.message);
-      setError(data.error);
-      setLoading(false);
-      return;
-    }
 
     await createSummaryAction(payload);
     toast.success("Summary Created!");

@@ -85,11 +85,15 @@ module.exports = ({ strapi }) => ({
     const videoId = ctx.params.videoId;
     if (!videoId) ctx.throw(400, "videoId is required");
 
+    console.log("videoId", videoId);
+
     const pluginSettings = await strapi.config.get("plugin.summary-ai");
     try {
 
       const transcript = await getTranscript(videoId);
       const response = await generateSummary(transcript, pluginSettings);
+
+      console.log(response, "from plugin");
       
       return {
         title: response.title,
